@@ -4,7 +4,10 @@
 
 `bs` is a CLI tool from the bs-factory development tooling repository. It
 orchestrates AI-driven development workflows by managing Claude Code instances
-in isolated git worktrees.
+in isolated git worktrees. Issue tracking is handled by
+[git-native-issue](https://github.com/remenoscodes/git-native-issue), which
+stores issues as Git commits under `refs/issues/` — keeping all workflow state
+inside the repository with no external services.
 
 ## Problem Statement
 
@@ -32,10 +35,13 @@ Claude Code instances that each operate in a fully isolated environment.
    The orchestrator enforces this at the process level, not by instructing
    agents to behave.
 
-2. **Lifecycle-driven, not task-driven.** Workflows progress through defined
-   stages. Each stage has entry criteria, an agent prompt, and exit criteria.
-   The orchestrator advances workflows through stages — it doesn't manage
-   individual tasks within a stage.
+2. **Issue-driven lifecycle.** Every workflow begins as a git-native-issue.
+   The issue is the durable identity of the work — it is created before any
+   branch or worktree exists, carries metadata (labels, priority, assignee)
+   through all stages, and is closed only when the workflow reaches ACCEPT.
+   Workflows progress through defined stages; each stage has entry criteria,
+   an agent prompt, and exit criteria. The orchestrator advances workflows
+   through stages — it doesn't manage individual tasks within a stage.
 
 3. **Engineer-in-the-loop at stage boundaries.** The orchestrator never
    auto-advances a workflow to the next stage. The engineer reviews output,
@@ -87,10 +93,12 @@ graph TD
         main --- wt_a
         main --- wt_b
         main --- wt_c
+        issues["refs/issues/*<br>(git-native-issue)"]
     end
 
     cmds --> ORCH
     ORCH --> REPO
+    ORCH -- "create / label / close" --> issues
 ```
 
 
@@ -101,25 +109,34 @@ does, what it produces, and what the engineer evaluates before advancing.
 
 ```mermaid
 graph LR
+    issue_create(("issue<br>created")) --> concept
     concept --> spec --> implement --> verify --> review --> accept
+    accept --> issue_close(("issue<br>closed"))
     verify -- "fix failures" --> implement
 ```
 
 ### Stage Definitions
 
 #### 1. CONCEPT
-- **Input:** Engineer provides a short description (1-3 sentences).
+- **Input:** Engineer (or other stakeholder) creates a git-native-issue describing the work
+  (`git issue create "<title>" -m "<description>"` or `bs new "<concept>"`
+  which delegates to it). Labels, priority, and assignee can be set at
+  creation time.
 - **Agent work:** None. This is engineer-only.
-- **Output:** The description is recorded in the workflow manifest.
+- **Output:** A git-native-issue exists under `refs/issues/<uuid>`. The
+  orchestrator records the issue ID in the workflow manifest and sets the
+  issue label to `stage:concept`.
 - **Advance criteria:** Engineer is satisfied the concept is clear enough to
   spec.
 
 #### 2. SPEC
-- **Input:** Concept description + repository context.
+- **Input:** Issue description + any issue comments + repository context. The
+  orchestrator updates the issue label to `stage:spec`.
 - **Agent work:** Claude Code analyzes the codebase, asks clarifying questions
-  (written to a questions file the engineer reviews async), and produces a
-  specification document covering: what changes, where in the codebase, what
-  the acceptance criteria are, and what risks or dependencies exist.
+  (posted as issue comments via `git issue comment` so the engineer reviews
+  them async), and produces a specification document covering: what changes,
+  where in the codebase, what the acceptance criteria are, and what risks or
+  dependencies exist.
 - **Output:** `SPEC.md` in the worktree root.
 - **Advance criteria:** Engineer reviews the spec, approves or requests
   revisions (re-run the stage with feedback).
@@ -158,9 +175,11 @@ graph LR
 - **Input:** Reviewed branch.
 - **Agent work:** None. This is engineer-only.
 - **Engineer action:** Merge the branch (squash, rebase, or merge commit per
-  project convention), clean up the worktree. The orchestrator records the
-  workflow as complete.
-- **Output:** Branch merged, worktree removed, workflow archived.
+  project convention), clean up the worktree. The orchestrator closes the
+  git-native-issue (`git issue state <id> closed`) and records the workflow
+  as complete.
+- **Output:** Branch merged, worktree removed, issue closed, workflow
+  archived.
 
 
 ## Workflow Manifest
@@ -170,6 +189,7 @@ Each workflow is tracked by a manifest file stored in the repository at
 
 ```yaml
 id: widget-redesign
+issue: a1b2c3d4-e5f6-7890-abcd-ef1234567890   # git-native-issue UUID
 created: 2026-03-27T10:00:00Z
 concept: >
   Redesign the dashboard widget component to support resizable panels
@@ -182,16 +202,19 @@ history:
   - stage: concept
     entered: 2026-03-27T10:00:00Z
     completed: 2026-03-27T10:02:00Z
+    issue_label: "stage:concept"
 
   - stage: spec
     entered: 2026-03-27T10:02:00Z
     completed: 2026-03-27T10:45:00Z
     iterations: 2
+    issue_label: "stage:spec"
     notes: "Revised scope after first pass — removed animation requirement."
 
   - stage: implement
     entered: 2026-03-27T10:46:00Z
     completed: null
+    issue_label: "stage:implement"
     pid: 48291
 
 config:
@@ -203,30 +226,35 @@ config:
 ## CLI Interface
 
 ```
-bs new "<concept>"          Create a new workflow, set up branch + worktree
+bs new "<concept>"          Create issue + branch + worktree for a new workflow
 bs status                   Show all workflows and their current stages
 bs run <id>                 Spawn Claude Code for the current stage
-bs advance <id>             Move workflow to the next stage
-bs revise <id> "<feedback>" Re-run the current stage with engineer feedback
-bs back <id>                Move workflow back one stage
-bs drop <id>                Abandon workflow, clean up branch + worktree
+bs advance <id>             Move workflow to next stage, update issue label
+bs revise <id> "<feedback>" Re-run current stage with feedback (adds issue comment)
+bs back <id>                Move workflow back one stage, update issue label
+bs drop <id>                Abandon workflow, close issue, clean up worktree
 bs log <id>                 Show stage history for a workflow
 ```
 
 ### Example Session
 
 ```bash
-# Morning: engineer queues up three pieces of work
+# Morning: engineer queues up three pieces of work.
+# Each command creates a git-native-issue, branch, and worktree.
 $ bs new "Add rate limiting to the /api/search endpoint"
+Created issue: a1b2c3d4 "Add rate limiting to the /api/search endpoint"
 Created workflow: rate-limit (stage: concept)
 
 $ bs new "Fix timezone bug in event scheduler — times off by 1hr in DST"
+Created issue: e5f67890 "Fix timezone bug in event scheduler..."
 Created workflow: tz-fix (stage: concept)
 
 $ bs new "Extract database queries from handlers into a repository layer"
+Created issue: abcdef12 "Extract database queries from handlers..."
 Created workflow: repo-layer (stage: concept)
 
-# Advance all three to spec stage and kick off agents
+# Advance all three to spec stage and kick off agents.
+# Each advance updates the issue label to stage:spec.
 $ bs advance rate-limit && bs run rate-limit
 $ bs advance tz-fix && bs run tz-fix
 $ bs advance repo-layer && bs run repo-layer
@@ -235,15 +263,15 @@ $ bs advance repo-layer && bs run repo-layer
 # Engineer does other work. Checks back later.
 
 $ bs status
-  rate-limit   spec        ● running   .worktrees/rate-limit
-  tz-fix       spec        ✓ done      .worktrees/tz-fix
-  repo-layer   spec        ● running   .worktrees/repo-layer
+  rate-limit   spec        ● running   .worktrees/rate-limit   issue:a1b2c3d4
+  tz-fix       spec        ✓ done      .worktrees/tz-fix       issue:e5f67890
+  repo-layer   spec        ● running   .worktrees/repo-layer   issue:abcdef12
 
 # Review the tz-fix spec, looks good, advance to implement
 $ cat .worktrees/tz-fix/SPEC.md
 $ bs advance tz-fix && bs run tz-fix
 
-# rate-limit spec needs revision
+# rate-limit spec needs revision — feedback is also posted as an issue comment
 $ cat .worktrees/rate-limit/SPEC.md
 $ bs revise rate-limit "Use token bucket, not sliding window. 100 req/min."
 ```
@@ -258,9 +286,12 @@ Claude Code instance is truly isolated.
 
 When `bs new` runs:
 
-1. Create a branch from the current HEAD: `git branch <workflow-branch>`
-2. Create a worktree: `git worktree add .worktrees/<id> <workflow-branch>`
-3. Write the manifest to `.bs/workflows/<id>.yaml`
+1. Create a git-native-issue: `git issue create "<concept>"` — captures the
+   UUID returned.
+2. Set the initial issue label: `git issue edit <uuid> -l stage:concept`
+3. Create a branch from the current HEAD: `git branch <workflow-branch>`
+4. Create a worktree: `git worktree add .worktrees/<id> <workflow-branch>`
+5. Write the manifest to `.bs/workflows/<id>.yaml` (including the issue UUID).
 
 ### Agent Spawning
 
@@ -356,6 +387,10 @@ small Python CLI (~400-600 lines). Key implementation choices:
 - **Prompts:** Markdown templates in `.bs/prompts/` with `{variable}`
   placeholders. `envsubst` or Python string formatting.
 - **Git operations:** Direct `git` CLI calls. No library dependency.
+- **Issue tracking:** `git issue` CLI for create, label, comment, and close
+  operations. The orchestrator calls `git issue edit <id> -l stage:<stage>`
+  on every stage transition.
 - **Worktree cleanup:** `git worktree remove` + `git branch -d` on `bs drop`.
-- **Dependencies:** Git, Claude Code CLI. Optional: `yq` for YAML parsing
-  in the Bash variant.
+  Also closes the associated issue via `git issue state <id> closed`.
+- **Dependencies:** Git, Claude Code CLI, git-native-issue. Optional: `yq`
+  for YAML parsing in the Bash variant.
