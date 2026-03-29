@@ -10,6 +10,7 @@ Standards identified as needed for the project's process and lifecycle governanc
 | ISO/IEC/IEEE 12207:2026 | *Systems and software engineering — Software life cycle processes*, 2nd ed. | 2026 | ISO/IEC/IEEE | https://standards.ieee.org/ieee/12207/11416/ |
 | ISO/IEC 29110-1-1:2024 | *Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs) — Part 1-1: Overview* | 2024 | ISO/IEC | https://www.iso.org/standard/85337.html |
 | IEEE 29148:2018 | *Systems and software engineering — Life cycle processes — Requirements engineering* | 2018 | ISO/IEC/IEEE | https://standards.ieee.org/standard/29148-2018.html |
+| ISO/IEC/IEEE 15289:2019 | *Systems and software engineering — Content of life-cycle information items (documentation)* | 2019 | ISO/IEC/IEEE | https://www.iso.org/standard/74909.html |
 
 ## Notes
 
@@ -26,3 +27,5 @@ Standards identified as needed for the project's process and lifecycle governanc
 The specific parts needed will depend on whether the focus is software engineering profiles, systems engineering profiles, or both, and which maturity tier (Basic, Intermediate, etc.) applies.
 
 **IEEE 29148:2018** — The primary requirements engineering standard. Defines requirements processes, artifact types (SyRS, SRS, verification cross-reference matrix, RTM), and quality attributes for well-formed requirements. Supersedes IEEE 830-1998, IEEE 1233-1998, and IEEE 1362-1998.
+
+**ISO/IEC/IEEE 15289:2019** — The companion documentation standard referenced by 15288, 12207, and 29110. Defines the content and structure of life-cycle information items (documentation) produced by the processes in those standards. Organizes information items into seven generic types: Descriptions, Plans, Policies, Procedures, Reports, Requests, and Specifications. Essential for understanding the expected content of artifacts across all lifecycle processes. Replaces the 2017 edition.
