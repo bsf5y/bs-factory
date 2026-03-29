@@ -10,6 +10,55 @@ Documenting software and system architecture has evolved from informal whiteboar
 
 ---
 
+## Documentation Lifecycle and Maturity Model
+
+Architecture knowledge rarely begins as a formal specification. It starts as a few sentences from a stakeholder describing a need or a constraint, then progressively deepens through increasingly structured artifacts as understanding grows and decisions are made. The lifecycle below describes that progression — from initial context capture through to fully governed specifications — and the maturity model frames how far along that path a given piece of architecture knowledge has traveled.
+
+### Artifact Lifecycle
+
+Each row represents a stage in the life of an architectural concept. Artifacts produced at earlier stages feed into and are referenced by later ones. Not every concept reaches every stage — lightweight changes may stop at an ADR, while major system boundaries will typically progress through the full sequence.
+
+| Stage | Artifact | Purpose | Typical Content |
+|-------|----------|---------|-----------------|
+| **Context** | Context statement | Capture the initial need, constraint, or opportunity in the stakeholder's own language | A few sentences to a short paragraph — who needs what, why it matters, and any known constraints |
+| **Exploration** | RFC (Request for Comments) | Open the idea to broader input — surface trade-offs, alternatives, and risks before committing to a direction | Problem framing, proposed approach, alternatives considered, open questions, and a call for feedback |
+| **Decision** | ADR (Architecture Decision Record) | Record the chosen direction and the reasoning behind it so future readers understand the *why* | Context, decision, status, consequences — following MADR or Nygard format |
+| **Design** | Design document | Elaborate the decided approach into a concrete design that can be reviewed for feasibility and completeness | Component breakdown, interaction diagrams (C4, sequence), data models, interface contracts, error handling strategies |
+| **Specification** | SPEC | Define the normative, implementable contract — precise enough to code against and test against | Formal interface definitions, behavioral requirements, acceptance criteria, performance targets, compliance constraints |
+| **Verification** | Test plan / architecture tests | Confirm the implementation matches the specification and the documented architecture | ArchUnit or PyTestArch rules, integration test suites, conformance checklists |
+| **Maintenance** | Living documentation | Keep all upstream artifacts in sync as the system evolves | Diagram regeneration via CI/CD, scheduled review cycles, drift detection, deprecation notices |
+
+The key insight is that each artifact inherits context from its predecessors. An ADR references the RFC discussion that preceded it. A SPEC traces back to the design document and the ADR that authorized the approach. This traceability chain means that even the final specification remains connected to the original stakeholder need.
+
+### Maturity Model
+
+The maturity model describes how far a given architectural concept has been elaborated through the artifact lifecycle. It is not an organizational maturity assessment — it applies to individual systems, components, or decisions.
+
+| Level | Name | Characteristics |
+|-------|------|-----------------|
+| **1 — Stated** | Context only | A stakeholder has described the need. No formal analysis or decision has been made. The concept exists as a context statement — possibly just a paragraph in a meeting note or issue tracker. |
+| **2 — Explored** | RFC issued | The concept has been opened for discussion. Trade-offs and alternatives are documented. Stakeholders have had the opportunity to provide input. The idea is understood well enough to make a decision. |
+| **3 — Decided** | ADR recorded | A direction has been chosen and the rationale is captured. The team has committed to an approach, and the decision is discoverable by anyone who needs to understand why things are the way they are. |
+| **4 — Designed** | Design elaborated | The decided approach has been worked out in enough detail that implementation can begin. Components, interfaces, and interactions are described — typically with diagrams and prose. |
+| **5 — Specified** | SPEC published | The design has been refined into a normative specification with acceptance criteria, interface contracts, and testable requirements. This is the artifact that implementation and verification are measured against. |
+| **6 — Verified** | Architecture tested | The implementation has been validated against the specification through automated architecture tests, conformance checks, or formal review. The documented architecture and the running system are known to match. |
+
+Not every concept needs to reach Level 6. A minor integration decision may be fully served by an ADR at Level 3. A core system boundary or safety-critical component should progress through the full sequence. The appropriate target level depends on the scope, risk, and regulatory context of the decision.
+
+### Artifact Relationships and Traceability
+
+The artifacts form a directed graph of references. Maintaining these links is what turns a collection of documents into a coherent body of architecture knowledge.
+
+- A **Context statement** may spawn one or more **RFCs** if the problem space is broad enough to warrant multiple proposals.
+- An **RFC** resolves into one or more **ADRs** — one for each distinct decision that emerges from the discussion.
+- An **ADR** authorizes a **Design document** that elaborates the chosen direction.
+- A **Design document** is refined into one or more **SPECs** — one per interface, contract, or component that needs formal definition.
+- A **SPEC** is validated by **architecture tests** that enforce conformance in code.
+
+In a docs-as-code workflow, these references are simple cross-links between versioned markdown files. Each artifact includes a metadata header that identifies its predecessors, making the full lineage of any specification traceable back to the original stakeholder context.
+
+---
+
 ## Documentation Frameworks and Methodologies
 
 ### Arc42

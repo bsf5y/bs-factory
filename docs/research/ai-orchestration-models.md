@@ -389,6 +389,86 @@ Workflows triggered by events with durable execution guarantees. The orchestrato
 
 ---
 
+## Human-Centric Document Artifacts
+
+Orchestration models produce two categories of artifacts: operational artifacts consumed by agents (context injections, state files, task queues) and human-centric artifacts intended for people to read, review, and govern. This section focuses on the latter — documents relating to requirements, architecture, specifications, and design — and identifies where human-in-the-loop stage gates exist in each model's workflow.
+
+### Intent (Augment Code)
+
+Intent produces the richest human-centric artifact chain of any surveyed orchestrator.
+
+| Artifact | Lifecycle Role | Human-in-the-Loop |
+|----------|---------------|-------------------|
+| **Living specification** | Central governing document — drafted by the Coordinator Agent from codebase analysis, then continuously updated as agents complete work. Functions simultaneously as requirements specification and design description. | **Yes — mandatory approval gate.** The Coordinator proposes a plan derived from the spec; execution cannot begin until a human approves it. |
+| **Task plan** | Generated from the specification — decomposes the spec into discrete implementation units assigned to Implementor Agents. | Visible to the human but not a formal gate — approval is at the plan level, not per-task. |
+| **Verification report** | The Verifier Agent checks completed work against the specification and flags inconsistencies. | Results are surfaced to the human. Failures may trigger re-work or human intervention, but the gate is implicit rather than formalized. |
+
+**Lifecycle coverage:** Intent collapses the upstream stages (context, exploration, decision) into a single AI-generated specification. The spec is a living artifact that evolves, but distinct context statements, RFCs, and ADRs are not produced as separate documents. The closest analog to the Context → RFC → ADR → Design → SPEC lifecycle is: human prompt → AI-drafted spec → human approval → AI implementation → AI verification.
+
+### GSD-2 (Get Shit Done)
+
+GSD-2 produces a structured hierarchy of planning documents, all stored as files on disk.
+
+| Artifact | Lifecycle Role | Human-in-the-Loop |
+|----------|---------------|-------------------|
+| **Roadmap** | High-level project plan spanning all milestones. Reassessed after each slice completes. | Defined by the human at project inception. Reassessment checkpoints exist but are agent-driven — no mandatory human gate at reassessment. |
+| **Milestone plan** | Groups of shippable slices (4–10 per milestone). Defines what constitutes a shippable version. | Human-defined scope. Milestone validation occurs at completion but the gate mechanism is not specified as requiring human sign-off. |
+| **Slice plan** | A demoable capability broken into tasks. Each slice produces a clean git commit. | Agent-generated. No explicit human review gate between slices. |
+| **Task plan** | One context-window-sized unit of work with injected context (prior summaries, dependencies, roadmap excerpts). | Agent-generated and agent-consumed. Not intended as a human-reviewed artifact. |
+| **Decisions register** | A log of architectural and implementation decisions made during execution. Functions as an ADR-like record. | Agent-maintained. Readable by humans but no formal review or approval process is described. |
+
+**Lifecycle coverage:** GSD-2 covers planning (roadmap, milestones) and decision-tracking (decisions register) but does not produce requirements specifications, architecture descriptions, or RFCs as distinct artifacts. The decisions register is the closest analog to ADRs, but it is a running log rather than a set of individually governed documents. Human involvement is heaviest at project inception (defining the roadmap) and lightest during autonomous execution.
+
+### Gastown
+
+Gastown's artifacts are primarily operational — designed for agent coordination rather than human consumption.
+
+| Artifact | Lifecycle Role | Human-in-the-Loop |
+|----------|---------------|-------------------|
+| **Molecules** | TOML-defined workflow templates with tracked steps. Define repeatable processes. | Human-authored templates. Once defined, execution is autonomous. |
+| **Convoys** | Work tracking bundles grouping multiple tasks. | Agent-managed. No human review gate. |
+| **CV chains** | Per-agent work history — a persistent record of what each agent (Polecat) has done across sessions. | Audit-readable but not designed for human review as a governance artifact. |
+
+**Lifecycle coverage:** Gastown does not produce requirements, architecture, or specification documents as part of its workflow. It is designed for autonomous execution with hierarchical machine supervision (Witness and Deacon). There are no formal human-in-the-loop stage gates — the system assumes human involvement happens outside the orchestrator, before work is dispatched.
+
+### MetaGPT
+
+MetaGPT explicitly simulates a software company's role structure, implying role-appropriate document artifacts.
+
+| Artifact | Lifecycle Role | Human-in-the-Loop |
+|----------|---------------|-------------------|
+| **Product requirements** | Generated by the Product Manager agent from the initial prompt. | Not specified as requiring human approval before downstream agents consume it. |
+| **System design / architecture** | Generated by the Architect agent based on the product requirements. | Not specified as a formal gate. |
+| **Implementation plan** | Generated by the Engineer agent from the architecture. | Not specified as a formal gate. |
+| **QA artifacts** | Generated by the QA agent — test plans and test cases. | Not specified as a formal gate. |
+
+**Lifecycle coverage:** MetaGPT is the only surveyed model that explicitly produces artifacts at multiple stages of the documentation lifecycle — requirements, architecture, and test planning — as distinct documents generated by role-specific agents. However, the orchestration overview does not describe human review gates between roles. The agent pipeline (PM → Architect → Engineer → QA) flows without mandatory human intervention, which means the artifacts may serve more as intermediate context for downstream agents than as governed human-centric documents.
+
+### General-Purpose Frameworks
+
+The general-purpose frameworks (LangGraph, CrewAI, AutoGen, Semantic Kernel, OpenAI Agents SDK) and enterprise platforms (Agentforce, ServiceNow, watsonx, UiPath) do not prescribe specific document artifacts. They provide primitives that teams use to build custom workflows.
+
+| Framework | Human-in-the-Loop Support | Document Artifacts |
+|-----------|--------------------------|-------------------|
+| **LangGraph** | Explicit support — human-in-the-loop is a first-class pattern with interrupt/resume primitives | Team-defined |
+| **CrewAI** | Configurable — tasks can require human input | Team-defined |
+| **AutoGen** | Supported through conversation patterns — human agents can participate in multi-agent chat | Team-defined |
+| **Enterprise platforms** | Built-in governance and approval workflows | Platform-specific; typically audit logs and process records |
+
+### Summary: Artifact Coverage and Stage Gates
+
+| Orchestrator | Context | Requirements | Architecture / Design | Specification | Verification | Human Gate |
+|-------------|---------|-------------|----------------------|---------------|-------------|------------|
+| **Intent** | Human prompt | Collapsed into living spec | Collapsed into living spec | Living specification | Verifier Agent report | **Yes — plan approval before execution** |
+| **GSD-2** | Human-defined roadmap | Not distinct | Not distinct | Not distinct | Milestone validation | At inception only |
+| **Gastown** | External | Not produced | Not produced | Not produced | Machine supervision | None in orchestration |
+| **MetaGPT** | Human prompt | PM agent output | Architect agent output | Not distinct from design | QA agent output | None described |
+| **LangGraph** | Team-defined | Team-defined | Team-defined | Team-defined | Team-defined | Framework primitive available |
+
+The dominant gap across all models is the absence of a governed artifact lifecycle with explicit human stage gates at each transition. Intent comes closest by mandating human approval of the plan, but even it collapses the upstream exploration and decision stages. No surveyed orchestrator produces the full Context → RFC → ADR → Design → SPEC → Verification artifact chain with human gates between stages. This represents an opportunity for orchestration models to integrate documentation lifecycle management — producing governed, traceable, human-reviewable artifacts at each maturity level rather than treating documentation as a side effect of implementation.
+
+---
+
 ## Maturity Comparison
 
 | Orchestrator | Type | Maturity | GitHub Stars | Platform | License |
@@ -460,4 +540,5 @@ The dominant pattern in practice is hybrid: adopt an existing framework for the 
 - **Specification-driven development** — Living specs that stay synchronized with implementation, driven by tools like Intent
 - **Multi-provider flexibility** — Lock-in resistance is driving demand for provider-agnostic orchestration (GSD-2 supports 20+ providers)
 - **Cost as a first-class concern** — Model routing, cost tracking, and budget controls are becoming standard orchestration features rather than afterthoughts
+- **Documentation lifecycle as orchestration concern** — Current orchestrators treat human-centric artifacts (requirements, architecture, specifications) as external inputs or incidental outputs. The opportunity is to integrate governed artifact lifecycles with explicit human stage gates into the orchestration model itself, so that documentation matures alongside implementation rather than being produced after the fact
 - **Failure rate awareness** — Industry recognition that 40%+ of AI orchestration projects fail without proper observability, governance, and state management is driving demand for mature frameworks over custom builds
