@@ -148,6 +148,13 @@ A Python-based "file per document" approach (compared to Doorstop's file-per-req
 
 A Sphinx extension that adds requirements management capabilities to the Python documentation framework. Extensible for team-specific workflows.
 
+**[Reqflow](https://goeb.github.io/reqflow/)**
+
+A lightweight, open-source command-line tool for tracing requirements across documents. Analyzes existing documents (docx, text, HTML) to extract requirements and generate traceability matrices and coverage reports. Outputs to text, CSV, or HTML. Useful for teams that manage requirements in conventional documents and need cross-document traceability without migrating to a dedicated requirements platform.
+
+- **Advantage:** Works with existing document formats; fast CLI-based analysis; no database or server infrastructure required
+- **Limitation:** Command-line only; no GUI; limited to traceability reporting rather than full requirements lifecycle management
+
 **[OSRMT](https://sourceforge.net/projects/osrmt/) (Open Source Requirements Management Tool)**
 
 A community-driven open-source alternative hosted on GitHub.
