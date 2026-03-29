@@ -50,7 +50,7 @@ A five-part standard covering test concepts and definitions, test processes, tes
 
 - **Note:** This standard has been controversial. A 2014 petition with 3,000+ signatures from testing practitioners called for its withdrawal, arguing that it prescribes a single approach where context-dependent testing is more appropriate. Organizations should evaluate whether its documentation requirements align with their development culture.
 
-### ISTQB — International Software Testing Qualifications Board
+### [ISTQB](https://www.istqb.org/) — International Software Testing Qualifications Board
 
 A widely recognized testing certification body. The Foundation Level (CTFL) aligns with ISO/IEC/IEEE 29119-2 test processes. Provides a common vocabulary and methodology for testing professionals, though some practitioners note tension between ISTQB's structured approach and agile testing practices.
 
@@ -58,9 +58,9 @@ A widely recognized testing certification body. The Foundation Level (CTFL) alig
 
 Applies to any organization subject to FDA regulation. Requires computer-generated, time-stamped audit trails recording the date, time, and identity associated with all entries and actions. Electronic signatures must be linked to records and include the signer's printed name, date/time, and the meaning of the signature. Audit trails must be retained as long as the subject electronic records.
 
-### ReqIF — Requirements Interchange Format
+### [ReqIF](https://www.omg.org/spec/ReqIF) — Requirements Interchange Format
 
-An open, XML-based standard (developed by ProSTEP iViP, standardized by OMG) for lossless exchange of requirements between tools and stakeholders. Preserves requirement objects, attributes, traceability links, and metadata during transfer. Supported by nearly all major requirements management and SysML tools.
+An open, XML-based standard (developed by [ProSTEP iViP](https://www.prostep.org/), standardized by OMG) for lossless exchange of requirements between tools and stakeholders. Preserves requirement objects, attributes, traceability links, and metadata during transfer. Supported by nearly all major requirements management and SysML tools.
 
 - **Industry adoption:** Widely used in automotive (ISO 26262), aerospace (DO-178C), and medical devices (IEC 62304) for maintaining traceability across organizational boundaries
 
@@ -70,7 +70,7 @@ An open, XML-based standard (developed by ProSTEP iViP, standardized by OMG) for
 
 ### Enterprise Solutions
 
-**IBM DOORS / DOORS Next Generation**
+**[IBM DOORS / DOORS Next Generation](https://www.ibm.com/products/requirements-management-doors-next)**
 
 The long-established standard for formal requirements management in complex regulated industries. Strong traceability and change management capabilities within the IBM Jazz ecosystem. Known for comprehensive functionality but also for a steep learning curve, complex interface, and significant implementation cost.
 
@@ -78,7 +78,7 @@ The long-established standard for formal requirements management in complex regu
 - **Industries:** Aerospace, defense, automotive, large-scale systems engineering
 - **Pricing:** ~$164/month (SaaS)
 
-**Jama Connect**
+**[Jama Connect](https://www.jamasoftware.com/)**
 
 A modern platform emphasizing usability and collaboration. Its "Review Center" enables diverse stakeholders — including non-technical participants — to engage in requirements reviews without specialized training. Strong change tracking and higher user adoption rates compared to more traditional tools.
 
@@ -86,7 +86,7 @@ A modern platform emphasizing usability and collaboration. Its "Review Center" e
 - **Industries:** Cross-industry; growing adoption in automotive, medical devices, aerospace
 - **Differentiator:** Intuitive design for distributed teams
 
-**Polarion (Siemens)**
+**[Polarion](https://polarion.plm.automation.siemens.com/) (Siemens)**
 
 An integrated solution combining requirements, change, and test management. Deeply embedded in the Siemens product ecosystem. Highly customizable but requires technical expertise to configure. Particularly strong in automotive and electronics.
 
@@ -94,7 +94,7 @@ An integrated solution combining requirements, change, and test management. Deep
 - **Industries:** Automotive, electronics, heavily regulated environments
 - **Differentiator:** Tight integration with Siemens PLM tools
 
-**Codebeamer (PTC)**
+**[Codebeamer](https://www.ptc.com/en/products/codebeamer) (PTC)**
 
 A collaborative ALM solution covering project management, document management, requirements management, defect tracking, and test management. Integrates with IBM DOORS, MS Office, Jira, Jenkins, Git, and PLM tools.
 
@@ -102,7 +102,7 @@ A collaborative ALM solution covering project management, document management, r
 - **Industries:** Automotive, medical devices, industrial
 - **Differentiator:** Broad ALM coverage in a single platform
 
-**Visure Requirements**
+**[Visure Requirements](https://visuresolutions.com/)**
 
 A specialized Requirements ALM platform with explicit focus on regulatory compliance. Covers requirements management, risk management, test management, bug tracking, traceability, and standard compliance reporting.
 
@@ -110,7 +110,7 @@ A specialized Requirements ALM platform with explicit focus on regulatory compli
 - **Industries:** Safety-critical and regulated (automotive, aerospace, medical, railway)
 - **Differentiator:** Built-in compliance frameworks for multiple standards
 
-**Helix RM (Perforce)**
+**[Helix RM](https://www.perforce.com/products/helix-rm) (Perforce)**
 
 A modular ALM tool with integrated requirements management. Fits well in organizations already using the Perforce version control ecosystem.
 
@@ -119,13 +119,13 @@ A modular ALM tool with integrated requirements management. Fits well in organiz
 
 ### Lightweight and Modern Solutions
 
-**Valispace**
+**[Valispace](https://www.valispace.com/)**
 
 Designed specifically for hardware and systems engineering. Uniquely links requirements in real-time with a system model, enabling data-driven verification. Features AI-assisted requirements management and advanced SysML support.
 
 - **Differentiator:** Real-time linkage between requirements and engineering data; hardware-centric focus
 
-**ReqView**
+**[ReqView](https://www.reqview.com/)**
 
 A lightweight, Git-based requirements management tool suited for small-to-medium projects. Provides traceability, collaboration, and impact analysis with minimal deployment overhead.
 
@@ -133,22 +133,22 @@ A lightweight, Git-based requirements management tool suited for small-to-medium
 
 ### Open-Source Options
 
-**Doorstop**
+**[Doorstop](https://github.com/doorstop-dev/doorstop)**
 
 Text-based requirements management where each requirement is stored as a YAML file in a Git-managed directory structure. Enables parallel advancement of requirements, documentation, and implementation in the same version control workflow.
 
 - **Advantage:** Full version control integration; requirements live alongside code
 - **Limitation:** Requires familiarity with Git; non-developers may find it difficult
 
-**StrictDoc**
+**[StrictDoc](https://github.com/strictdoc-project/strictdoc)**
 
 A Python-based "file per document" approach (compared to Doorstop's file-per-requirement model). Supports Sphinx export for documentation generation.
 
-**Sphinx-Needs**
+**[Sphinx-Needs](https://sphinx-needs.readthedocs.io/)**
 
 A Sphinx extension that adds requirements management capabilities to the Python documentation framework. Extensible for team-specific workflows.
 
-**OSRMT (Open Source Requirements Management Tool)**
+**[OSRMT](https://sourceforge.net/projects/osrmt/) (Open Source Requirements Management Tool)**
 
 A community-driven open-source alternative hosted on GitHub.
 
@@ -158,45 +158,45 @@ A community-driven open-source alternative hosted on GitHub.
 
 ### Commercial Solutions
 
-**TestRail (SmartBear)**
+**[TestRail](https://www.testrail.com/) (SmartBear)**
 
 A standalone test management tool with strong usability and reporting. Provides detailed test case control, structured test plans, and in-depth reporting. Not locked into any specific ALM platform.
 
 - **Best for:** Teams wanting detailed test management independent of their ALM tool
 
-**Zephyr (SmartBear)**
+**[Zephyr](https://smartbear.com/test-management/zephyr-scale/) (SmartBear)**
 
 The leading Jira test management add-on, available in three editions: Squad (basic test creation/execution), Scale (parameterization and reuse), and Enterprise (standalone with Jira sync).
 
 - **Best for:** Agile teams already using Jira
 
-**Xray (Atlassian ecosystem)**
+**[Xray](https://www.getxray.app/) (Atlassian ecosystem)**
 
 A DevOps-focused test management tool with strong automation capabilities. Supports manual and automated testing with BDD/Gherkin coverage — write Gherkin scripts in Jira, execute, and link results to requirements and defects.
 
 - **Best for:** Modern DevOps teams with CI/CD integration needs
 
-**qTest (Tricentis)**
+**[qTest](https://www.tricentis.com/products/unified-test-management-qtest) (Tricentis)**
 
 Enterprise test management built for scalability. Supports manual, automated, and exploratory testing in a single repository with cross-project test case reuse and requirements traceability.
 
 - **Best for:** Large-scale testing operations
 
-**SpiraTest (Inflectra)**
+**[SpiraTest](https://www.inflectra.com/SpiraTest/) (Inflectra)**
 
 A full test management platform for creating and running test cases, tracking defects, and generating detailed reports. Works with various ALM platforms.
 
-**PractiTest**
+**[PractiTest](https://www.practitest.com/)**
 
 End-to-end test management providing full visibility from requirements through test execution and bug tracking.
 
 ### Open-Source Solutions
 
-**Kiwi TCMS**
+**[Kiwi TCMS](https://kiwitcms.org/)**
 
 The most mature open-source test management solution. Supports manual and automated testing with bug tracker integration, access control, test automation framework plugins, visual reports, and a rich API.
 
-**TestLink**
+**[TestLink](https://testlink.org/)**
 
 An established open-source test management tool developed by testers. Quick to deploy with popular issue tracking integrations and test case import capabilities.
 
@@ -206,33 +206,33 @@ An established open-source test management tool developed by testers. Quick to d
 
 ALM platforms combine requirements, development tracking, and testing in a single ecosystem. They serve as the backbone for traceability and audit across the lifecycle.
 
-### Azure DevOps (Microsoft)
+### [Azure DevOps](https://azure.microsoft.com/en-us/products/devops) (Microsoft)
 
 Comprehensive ALM suite integrated with Visual Studio and Azure cloud services. Supports Agile, Scrum, and Kanban methodologies. Strong choice for organizations in the Microsoft/.NET ecosystem.
 
-### Jira + Ecosystem (Atlassian)
+### [Jira](https://www.atlassian.com/software/jira) + Ecosystem (Atlassian)
 
-Project planning and tracking core, extensible through a massive plugin ecosystem. Jira handles planning/tracking, Confluence handles documentation, Bitbucket handles source control, and Bamboo handles CI/CD. Test management added via Zephyr or Xray.
+Project planning and tracking core, extensible through a massive plugin ecosystem. [Jira](https://www.atlassian.com/software/jira) handles planning/tracking, [Confluence](https://www.atlassian.com/software/confluence) handles documentation, [Bitbucket](https://bitbucket.org/) handles source control, and [Bamboo](https://www.atlassian.com/software/bamboo) handles CI/CD. Test management added via Zephyr or Xray.
 
 - **Adoption:** The most widely used ALM platform in agile software development
 
-### Rally / CA Agile Central (Broadcom)
+### [Rally / CA Agile Central](https://www.broadcom.com/products/software/value-stream-management/rally) (Broadcom)
 
 Agile-focused ALM with built-in SAFe (Scaled Agile Framework) support. Features collaboration tools and agile-specific analytics. Available as both on-premises and SaaS.
 
 - **Best for:** Enterprises adopting SAFe at scale
 
-### Micro Focus ALM Octane
+### [Micro Focus ALM Octane](https://www.opentext.com/products/alm-octane)
 
 Enterprise-grade ALM with deep CI/CD pipeline integration. Connects with GitLab, GitHub, Jenkins, and other DevOps tools for end-to-end pipeline visibility and build/test result tracking.
 
-### GitLab
+### [GitLab](https://about.gitlab.com/)
 
 A full DevOps platform with integrated requirements management, test management, CI/CD, and security scanning. Provides a single platform from code to deployment.
 
 - **Best for:** Modern DevOps teams wanting a unified platform
 
-### GitHub
+### [GitHub](https://github.com/)
 
 Expanding ALM capabilities through GitHub Projects, Issues, and Actions. A growing marketplace of extensions adds test management and traceability features.
 
@@ -244,17 +244,17 @@ Expanding ALM capabilities through GitHub Projects, Issues, and Actions. A growi
 
 MBSE tools capture requirements, architecture, and behavior in formal models rather than documents. They enable automated traceability, simulation, and verification.
 
-### Cameo Systems Modeler (Dassault Systèmes)
+### [Cameo Systems Modeler](https://www.3ds.com/products/catia/no-magic/cameo-systems-modeler) (Dassault Systèmes)
 
 Supports SysML, UML, and UAF modeling with simulation, verification, requirements traceability, and collaboration. Traces requirements, changes, and dependencies with automated impact analysis.
 
 - **Industries:** Aerospace, defense, automotive, telecommunications
 
-### MagicDraw
+### [MagicDraw](https://www.3ds.com/products/catia/no-magic/magicdraw)
 
 A UML-centric modeling environment for software engineers with traceability between levels of abstraction. Part of the Dassault Systèmes ecosystem.
 
-### IBM Rhapsody
+### [IBM Rhapsody](https://www.ibm.com/products/systems-design-rhapsody)
 
 A legacy system and software design tool with advanced requirements traceability and model-based testing. Being phased out in favor of Cameo; migration tools available to preserve traceability during transition.
 
