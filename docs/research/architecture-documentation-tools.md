@@ -1,10 +1,16 @@
-# Software & System Architecture Documentation Tools
+# Software and System Architecture Documentation Tools
 
-A landscape overview of tools and frameworks for documenting software and system architecture, organized by category.
+A landscape overview of tools and frameworks for documenting software and system architecture. Organized by category to support tool selection and integration decisions.
 
 ---
 
-## Documentation Frameworks & Methodologies
+## Background
+
+Documenting software and system architecture has evolved from informal whiteboard sketches and static Visio diagrams into a discipline with dedicated frameworks, diagram-as-code tools, and architecture decision records — all increasingly stored in version control alongside the code they describe. The tools below span from lightweight developer-focused options to enterprise governance platforms.
+
+---
+
+## Documentation Frameworks and Methodologies
 
 ### Arc42
 
@@ -29,7 +35,8 @@ An open standard from The Open Group for Enterprise Architecture modeling. It sp
 - **Tools:** Archi (open-source), Sparx Enterprise Architect, Bizzdesign
 - **Best for:** Enterprise-wide governance across business and technology layers
 - **Relationship to C4:** More heavyweight; targets enterprise governance rather than developer communication
-
+- **Key docs:** [ArchiMate® 3.2 Specification](https://pubs.opengroup.org/architecture/archimate32-doc/ch-Definitions.html) and
+[TOGAF® Fundamental Content; The Open Group Architecture Framework](https://pubs.opengroup.org/togaf-standard/)
 ---
 
 ## Diagram-as-Code Tools
@@ -87,7 +94,7 @@ Extends C4 with an "architecture as code" approach. Define your model once in C#
 
 ---
 
-## Collaborative / Visual Tools
+## Collaborative and Visual Tools
 
 ### IcePanel
 
@@ -153,6 +160,9 @@ These keep your codebase aligned with your documented architecture through autom
 | Collaborative diagramming | IcePanel or Draw.io |
 | Sequence / interaction flows | PlantUML or Ilograph |
 | Unified rendering backend | Kroki |
+| Tracking concept maturity (Context → SPEC) | Docs-as-code workflow with linked artifacts at each lifecycle stage |
+| Capturing initial stakeholder context | Context statements and RFCs in versioned markdown |
+| Ensuring traceability from need to implementation | Cross-linked artifact chain — Context → RFC → ADR → Design → SPEC → Tests |
 
 ---
 
@@ -161,4 +171,6 @@ These keep your codebase aligned with your documented architecture through autom
 - **Architecture as Code** is becoming mainstream — architecture defined in executable code/DSL, committed to version control, with CI/CD automation to generate diagrams and documentation.
 - **AI/LLM integration** is transforming tools from static documentation to dynamic, AI-enhanced platforms with agentic capabilities that proactively monitor and suggest improvements.
 - **Convergence** is the dominant pattern — teams combine a documentation framework (arc42), a visualization approach (C4), a diagram-as-code tool (Mermaid/D2/Structurizr), and ADRs, all living in version control.
+- **Artifact lifecycle formalization** is accelerating — organizations are defining explicit progression paths (Context → RFC → ADR → Design → SPEC) so that architecture knowledge deepens through structured stages rather than appearing fully formed or not at all.
+- **Traceability as a first-class concern** is gaining traction — teams are linking downstream specifications back to upstream stakeholder context, making it possible to understand why any given interface contract or architectural constraint exists.
 - **Enterprise architecture market** crossed $1B+ in 2025, with notable consolidation (SAP acquired LeanIX; Bizzdesign unified MEGA HOPEX, Alfabet, and Horizzon).

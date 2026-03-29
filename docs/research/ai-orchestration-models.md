@@ -1,12 +1,10 @@
 # AI-Driven Workflow Orchestration Models
 
-A survey of established and emerging orchestration models for AI-driven software development workflows. This report covers architecture, maturity, adoption, and common requirements to inform a build-vs-buy decision.
-
-This document supplements [Software Engineering Standards](software-engineering-standards.md), [Architecture Documentation Tools](architecture-documentation-tools.md), and [Requirements and Test Tracking](requirements-and-test-tracking.md).
+A survey of established and emerging orchestration models for AI-driven software development workflows. Covers architecture, maturity, adoption, and common requirements to inform a build-vs-buy decision.
 
 ---
 
-## Why Orchestration Matters
+## Background
 
 As AI coding agents become capable of autonomous work — writing code, running tests, managing branches — the coordination problem becomes acute. A single agent working on a single task is straightforward. Multiple agents working in parallel across a codebase, maintaining context, recovering from failures, and producing coherent output requires orchestration.
 
@@ -423,7 +421,7 @@ Workflows triggered by events with durable execution guarantees. The orchestrato
 
 ---
 
-## Build vs. Buy Considerations
+## Selection Guide
 
 ### Factors Favoring an Existing Orchestrator
 
@@ -454,7 +452,7 @@ The dominant pattern in practice is hybrid: adopt an existing framework for the 
 
 ---
 
-## Market Trends
+## Industry Trends
 
 - **Convergence of orchestration and IDE** — Tools like Intent are merging orchestration with the development environment, blurring the line between "tool" and "workflow"
 - **Git as orchestration primitive** — Gastown, Intent, and GSD-2 all use git worktrees as their primary isolation mechanism, suggesting git-based coordination is becoming a standard pattern

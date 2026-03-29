@@ -1,10 +1,10 @@
 # Software Engineering Standards
 
-An overview of process standards, quality frameworks, and vocabulary standards for software and systems engineering. Standards help define a shared operating language where terms are clearly defined across teams, vendors, and stakeholders.
+An overview of process standards, quality frameworks, and vocabulary standards for software and systems engineering. Standards define a shared operating language where terms are clearly defined across teams, vendors, and stakeholders.
 
 ---
 
-## Origins and Lineage
+## Background
 
 Modern software engineering standards trace back to two parallel efforts in the late 1980s and early 1990s. The U.S. Department of Defense funded the Capability Maturity Model (CMM) at Carnegie Mellon University, which evolved into CMMI. In parallel, the European Union funded the SPICE initiative (Software Process Improvement and Capability Evaluation), which became the international standard ISO/IEC 15504 and later the modernized ISO/IEC 33000 series.
 
@@ -211,7 +211,7 @@ Each layer builds on those below it, creating a coherent vocabulary from foundat
 
 ---
 
-## Quick Reference
+## Selection Guide
 
 | Standard / Framework | Primary Purpose | Shared Language Role | Adoption |
 |----------------------|-----------------|----------------------|----------|
@@ -230,3 +230,12 @@ Each layer builds on those below it, creating a coherent vocabulary from foundat
 | **[ASPICE](aspice-references.md)** | Automotive process maturity | Automotive process language | Widely adopted across automotive supply chains |
 | **EN 50128** | Railway safety software | Railway-specific safety language | European railway standard |
 | **SAFe** | Scaled agile framework | Agile program language | Widely adopted for scaled agile |
+
+---
+
+## Industry Trends
+
+- **Agile-standards convergence** is accelerating — ISO 12207's 2027 revision targets native Agile/DevOps alignment, CMMI 2.0 restructured around agile practice areas, and Agile SPICE provides explicit ceremony-to-process mappings. The inherent tension at maturity levels 4–5 (quantitative management vs. empirical process control) remains unresolved; most organizations customize rather than adopt rigidly.
+- **AI-assisted compliance** is emerging, with tools beginning to automate gap analysis, audit evidence generation, and process tailoring recommendations.
+- **Continuous compliance** is replacing periodic assessment cycles, embedding standards conformance checks into CI/CD pipelines rather than treating compliance as a late-stage gate.
+- **Domain convergence** is increasing as automotive, aerospace, and medical device standards incorporate shared concerns around cybersecurity, supply chain integrity, and machine learning safety.
