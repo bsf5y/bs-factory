@@ -413,6 +413,14 @@ Workflows triggered by events with durable execution guarantees. The orchestrato
 | **Agentforce** | Enterprise CRM | GA | N/A (managed) | Salesforce | Commercial |
 | **watsonx Orchestrate** | Enterprise AI | GA | N/A (managed) | IBM Cloud | Commercial |
 
+**Maturity key:**
+
+- **GA** (General Availability) — Fully released, vendor-supported product available for production use by any customer
+- **Production** — Open-source project actively used in production environments by multiple organizations
+- **Established** — Mature open-source project with significant community adoption and stable APIs
+- **Growing** — Active development with increasing adoption but APIs and features may still be evolving
+- **Beta** — Publicly available for evaluation but not yet considered production-ready by its maintainers
+
 ---
 
 ## Build vs. Buy Considerations
