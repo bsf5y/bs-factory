@@ -1,5 +1,17 @@
 # bs — Bootstrap Workflow Orchestrator
 
+## DRAFT
+
+### TODO
+
+- Architecture documents, ADRs, RFCs, C4, System Design and Architecture docs
+- SPECs must be tracked with (or live within) issues.
+- SPEC may require other Architectural Documents to be created
+  - These documents may require seperate issues dedicated to architecture.
+- PLAN: We may want a plan or punchlist system
+- Resiliance to intra-stage interruptions (agent restarts)
+- ...
+
 ## Overview
 
 `bs` is a CLI tool from the bs-factory development tooling repository. It
@@ -8,6 +20,24 @@ in isolated git worktrees. Issue tracking is handled by
 [git-native-issue](https://github.com/remenoscodes/git-native-issue), which
 stores issues as Git commits under `refs/issues/` — keeping all workflow state
 inside the repository with no external services.
+
+## Working Files
+
+The following files are produced and consumed across the workflow lifecycle.
+Worktree stage artifacts (marked ephemeral) are removed with the worktree at
+ACCEPT and should be added to `.gitignore` so they are never committed to the
+workflow branch.
+
+| File | Purpose | Lifecycle Stage | Ephemeral? |
+|---|---|---|---|
+| `.bs/workflows/<id>.yaml` | Workflow manifest — orchestrator's source of truth for stage, branch, worktree, history, config, and PID tracking | Created at CONCEPT, updated at every stage transition, archived at ACCEPT | No |
+| `.bs/prompts/<stage>.md` | Template prompts with `{variable}` placeholders filled in and passed to Claude Code at each agent-driven stage | Referenced at SPEC, IMPLEMENT, VERIFY, REVIEW | No |
+| `CLAUDE.md` | Project conventions read by each Claude Code instance from its worktree (symlinked or copied from the repo root during worktree setup) | Read during all agent stages | No |
+| `SPEC.md` | Specification: changes, acceptance criteria, risks, and dependencies. Primary artifact bridging SPEC → IMPLEMENT → REVIEW | Produced in SPEC, consumed in IMPLEMENT and REVIEW | **Yes — git-ignored** |
+| `QUESTIONS.md` | Blocking questions the agent needs the engineer to clarify before proceeding | Produced in SPEC | **Yes — git-ignored** |
+| `VERIFY-FAILURES.md` | Failure report describing what checks failed and why, written when the agent cannot resolve failures within the retry limit | Produced in VERIFY (failure path only) | **Yes — git-ignored** |
+| `REVIEW.md` | Self-review of the full diff against the spec — covering compliance, code quality, edge cases, and concerns | Produced in REVIEW | **Yes — git-ignored** |
+
 
 ## Problem Statement
 

@@ -1,0 +1,164 @@
+# Software & System Architecture Documentation Tools
+
+A landscape overview of tools and frameworks for documenting software and system architecture, organized by category.
+
+---
+
+## Documentation Frameworks & Methodologies
+
+### Arc42
+
+Arc42 is a 12-chapter template covering quality requirements, solution strategies, crosscutting concepts, risks, and more — areas C4 doesn't address. Many teams use arc42 for overall structure and C4 for the visual diagrams within it. It's actively maintained and widely adopted commercially.
+
+- **Website:** [arc42.org](https://arc42.org/)
+- **Best for:** Comprehensive documentation structure around architectural visuals
+- **Relationship to C4:** Complementary — arc42 provides the template, C4 provides the diagrams
+
+### 4+1 Views (Philippe Kruchten)
+
+An established framework from the Software Engineering Institute (SEI) that describes systems through Module, Component & Connector, and Allocation views, each tailored to different stakeholder concerns. Widely referenced in enterprise and academic contexts.
+
+- **Best for:** Large enterprises with diverse stakeholder groups
+- **Relationship to C4:** More formal and stakeholder-oriented; C4 is simpler and developer-focused
+
+### ArchiMate
+
+An open standard from The Open Group for Enterprise Architecture modeling. It spans business, application, and technology layers with around 50 core concepts (compared to UML's 150+ or BPMN's 250+). Includes service-orientation and realization relationships to connect abstract to concrete elements.
+
+- **Website:** [opengroup.org/archimate](https://www.opengroup.org/archimate-forum/archimate-overview)
+- **Tools:** Archi (open-source), Sparx Enterprise Architect, Bizzdesign
+- **Best for:** Enterprise-wide governance across business and technology layers
+- **Relationship to C4:** More heavyweight; targets enterprise governance rather than developer communication
+
+---
+
+## Diagram-as-Code Tools
+
+These let you define diagrams in text/code and generate visuals, fitting naturally into version control and CI/CD workflows.
+
+### Structurizr
+
+Purpose-built for the C4 Model with a cloud platform and code-based approach. You define your model in a DSL, and it renders C4 diagrams. Considered the gold standard for C4-specific tooling.
+
+- **Website:** [structurizr.com](https://structurizr.com/)
+- **Best for:** Teams committed to C4 who want a dedicated platform
+
+### Mermaid.js
+
+JavaScript-based, free and open-source. Renders natively in GitHub markdown, making it great for embedding diagrams directly in repos. Supports flowcharts, sequence diagrams, class diagrams, state diagrams, and more. Simplest learning curve of any diagram-as-code tool.
+
+- **Website:** [mermaid.js.org](https://mermaid.js.org/)
+- **Best for:** Quick diagrams integrated into GitHub; lowest barrier to entry
+
+### PlantUML
+
+The most complete option for UML-style diagrams, especially sequence diagrams. Long-established with extensive language support and a large community.
+
+- **Website:** [plantuml.com](https://plantuml.com/)
+- **Best for:** Detailed sequence diagrams and precise technical specifications
+
+### D2 (by Terrastruct)
+
+A newer diagram scripting language with superior auto-layout and a developer-friendly syntax. Free and open-source with an optional paid platform.
+
+- **Website:** [d2lang.com](https://d2lang.com/)
+- **Best for:** Clean architecture diagrams with minimal manual positioning
+
+### Ilograph
+
+Interactive YAML-based diagramming with auto-layout. You define one model and it generates multiple navigable "perspectives" that stakeholders can explore. Particularly strong for complex systems with many interdependencies.
+
+- **Website:** [ilograph.com](https://www.ilograph.com/)
+- **Best for:** Interactive exploration of complex system relationships
+
+### Kroki
+
+A unified rendering API supporting 20+ diagram formats (C4, D2, PlantUML, Mermaid, Structurizr, and more). Acts as a central rendering engine — useful if your organization uses multiple diagramming tools.
+
+- **Website:** [kroki.io](https://kroki.io/)
+- **Best for:** Organizations using multiple diagram-as-code tools
+
+### C4InterFlow
+
+Extends C4 with an "architecture as code" approach. Define your model once in C#, YAML, or JSON DSL and auto-generate multiple diagram types including sequence diagrams for business processes.
+
+- **Website:** [c4interflow.com](https://www.c4interflow.com/)
+- **Best for:** Adding business process flows to C4; generating many diagrams from a single model
+
+---
+
+## Collaborative / Visual Tools
+
+### IcePanel
+
+A SaaS tool built around C4 principles that adds interactive user journey flows and collaborative features. Hits a middle ground between freeform drawing and strict code-based tools. Features a model-based system (single source of truth) and three-level diagram hierarchy.
+
+- **Website:** [icepanel.io](https://icepanel.io/)
+- **Best for:** Teams wanting C4-style modeling with GUI collaboration
+
+### Draw.io / Diagrams.net
+
+Ubiquitous free, open-source general-purpose diagramming tool with C4 templates available. Web-based with good collaboration support.
+
+- **Website:** [diagrams.net](https://www.diagrams.net/)
+- **Best for:** Quick, accessible diagramming with no cost
+
+---
+
+## Architecture Decision Records (ADRs)
+
+ADRs capture the *why* behind architectural choices — complementary to any diagramming approach.
+
+### MADR (Markdown Architectural Decision Records)
+
+The most popular ADR template. Stored as markdown files in your repo with a simple structure: context, decision, consequences. No specialized tooling needed — just markdown in version control.
+
+- **Website:** [adr.github.io/madr](https://adr.github.io/madr/)
+
+### Michael Nygard Template
+
+The original simple ADR format: Context, Decision, Status, Consequences. The default starting point for most teams.
+
+### Tooling
+
+- **adr.github.io** — Official ADR organization with templates and examples
+- **VS Code Extensions** — Multiple plugins provide ADR templates and scaffolding
+- **Documentation platforms** — MkDocs, Docusaurus, and similar can host ADR documentation
+
+---
+
+## Architecture Enforcement Tools
+
+These keep your codebase aligned with your documented architecture through automated testing.
+
+| Tool | Language | Description |
+|------|----------|-------------|
+| **ArchUnit** | Java | Enforce architecture rules via unit tests |
+| **PyTestArch** | Python | Architecture testing for Python projects |
+| **TSRC** | TypeScript/JS | Architecture rule checking for TS/JS |
+| **Diagrams** | Python | Programmatic infrastructure diagram generation |
+
+---
+
+## Selection Guide
+
+| Use Case | Recommended |
+|----------|-------------|
+| Simple visual communication for teams | C4 + Mermaid or IcePanel |
+| Comprehensive documentation structure | Arc42 (often with C4 visuals) |
+| Enterprise-wide EA governance | ArchiMate + Enterprise Architect |
+| Developer-friendly code-based approach | C4InterFlow, D2, or Ilograph |
+| Recording key decisions | MADR template in docs-as-code workflow |
+| Infrastructure / cloud architecture | Diagrams (Python) or Cloudcraft |
+| Collaborative diagramming | IcePanel or Draw.io |
+| Sequence / interaction flows | PlantUML or Ilograph |
+| Unified rendering backend | Kroki |
+
+---
+
+## Industry Trends (2024–2026)
+
+- **Architecture as Code** is becoming mainstream — architecture defined in executable code/DSL, committed to version control, with CI/CD automation to generate diagrams and documentation.
+- **AI/LLM integration** is transforming tools from static documentation to dynamic, AI-enhanced platforms with agentic capabilities that proactively monitor and suggest improvements.
+- **Convergence** is the dominant pattern — teams combine a documentation framework (arc42), a visualization approach (C4), a diagram-as-code tool (Mermaid/D2/Structurizr), and ADRs, all living in version control.
+- **Enterprise architecture market** crossed $1B+ in 2025, with notable consolidation (SAP acquired LeanIX; Bizzdesign unified MEGA HOPEX, Alfabet, and Horizzon).
