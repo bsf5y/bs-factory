@@ -161,6 +161,17 @@ Automotive functional safety standard defining ASILs (Automotive Safety Integrit
 
 Domain-specific adaptation of the ISO/IEC 33000 (SPICE) framework for automotive software development. Widely adopted across automotive supply chains as a process capability and maturity assessment model. Developed by the Automotive Special Interest Group (AUTOSIG) with backing from major OEMs. See [aspice-references.md](aspice-references.md) for additional detail.
 
+Automotive SPICE (ASPICE) is primarily built on the ISO/IEC 330xx family of standards
+(specifically ISO/IEC 33001-33099).
+
+It utilizes the process assessment framework from these ISO standards to evaluate mechatronic system development.
+
+Core Standards: ASPICE is aligned with ISO/IEC 33020 (process capability) and ISO/IEC TS 33061.
+
+Complementary Standards: While based on ISO/IEC 330xx for process management, ASPICE is often used alongside ISO 26262 (functional safety) and IATF 16949 (quality management).
+
+Structure: It uses the capability dimension (levels 0–5) defined in the ISO/IEC 330xx series to measure software development process maturity.
+
 ### EN 50128 — Railway Software
 
 European standard for safety-related railway software; specialization of IEC 61508 for railway control, protection, and signaling systems.
