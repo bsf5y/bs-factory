@@ -12,6 +12,18 @@ Standard / Source        | ISO Committee                                        
 [ISO/SAE 21434:2021](ISO_SAE_21434_2021(en).pdf)       |                                                         | Road vehicles — Cybersecurity engineering                              | https://www.iso.org/standard/70918.html       | 290
 
 ----
+## VSE
+
+Standard / Source               | ISO Committee                                                                        | Title                                                                  | Source URL                                    | Cost ($)
+---                             | ---                                                                                  | ---                                                                    | ---                                           | ---
+[ISO/IEC 29110-1-2:2024](https://www.iso.org/standard/85338.html)      | Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs) | Part 1-2: Vocabulary | https://www.iso.org/standard/85338.html | 0
+[ISO/IEC 29110-2-1:2015](https://www.iso.org/standard/62712.html)      | Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs) | Part 2-1: Framework and taxonomy | https://www.iso.org/standard/62712.html | 159
+[ISO/IEC TR 29110-5-6-2:2014](ISO_IEC_TR_29110-5-6-2_2014(en).pdf) | Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs) | Part 5-6-2: Systems engineering — Management and engineering guide: Generic profile group: Basic profile | https://www.iso.org/standard/63371.html | 0
+[ISO/IEC TR 29110-5-6-3:2019](https://www.iso.org/standard/72897.html) | Systems and software engineering — Lifecycle profiles for Very Small Entities (VSEs) | Part 5-6-3: Systems engineering — Management and engineering guide: Generic profile group: Intermediate profile | https://www.iso.org/standard/72897.html | 227
+
+
+
+----
 
 ## Compliance Standards
 
